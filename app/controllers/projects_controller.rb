@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :get_project,only: [:show,:redirect_if_not_owner]#except: [:index,:new,:destroy]
+  before_action :get_project,only: [:show,:destroy,:edit,:update,:redirect_if_not_owner]#except: [:index,:new,:destroy]
   #,only: [:show,:destroy,:manage_collaborators]
   before_action :redirect_if_not_owner, only: [:destroy,:edit,:update]
   
