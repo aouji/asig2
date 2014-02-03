@@ -1,0 +1,20 @@
+	<%= content_for :title, "Discussions for you" %> 
+	<!-- #{current_user.email} -->
+<%= link_to "Create new discussion",new_project_discussion_path%>
+	<h2>Discussions you own</h2>
+    <ul>
+    <% @owned.each do |owned| %>
+      <li>Title: <%= link_to owned.title, project_discussion_path(@proj,owned) %>
+        <ul>
+        <li>Body: <%= truncate_s(owned.body,30) %></li>
+        <li><%= link_to "Delete discussion",project_discussion_path(@proj,owned),method: :delete, data: {confirm: "Are you sure you want to delete this?"} %></li>
+      </ul></li>
+    <% end %>
+    </ul>
+  <h2>Discussions you are a member of</h2>
+    <ul>
+    <% @proj_discussions.each do |proj_discussion| %>
+      <li>Title: <%= link_to proj_discussion.title, project_discussion_path(@proj,proj_discussion) %></li>
+      <li>Body: <%= truncate_s(proj_discussion.body,30) %></li>
+    <% end %>
+    </ul>

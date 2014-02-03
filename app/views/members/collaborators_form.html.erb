@@ -1,0 +1,11 @@
+<h3>Add or remove project members.</h3>
+<%= form_for @proj, {url: project_members_path(@proj.id), method: "post"} do |f| %>
+  <%=hidden_field "project[member_ids]",''%>
+  <ul>
+  <% @users.each do |user| %>
+  <%= f.label "user's email", user.email,id: dom_id(user) %>
+  <%= check_box_tag('project[member_ids][]',user.id,@proj.members.include?(user),id: dom_id(user))%>
+  <% end %>
+  </ul>
+<%= f.submit 'submit' %>
+<%end %> 

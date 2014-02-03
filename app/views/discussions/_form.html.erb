@@ -1,0 +1,29 @@
+<%= form_for [@proj,@discussion] do |f| %>
+  <% if @discussion.errors.any? %>
+    <ul>
+      <% @discussion.errors.full_messages.each do |message| %>
+      <li class='rederror'><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div><%= f.label :title, "Discussion title" %>
+    <br>
+    <%= f.text_field :title%>
+  </div>
+    <br>
+  <div>
+    <%= f.label :body, "Discussion text" %>
+    <br>
+    <%= f.text_area :body  %>
+  </div>
+  <% if @discussion.persisted? %>
+  <h2>Change discussion's owner</h2>
+  <div>
+    <p>Note: If you change the owner, you will no longer be able to edit the discussion.</p>
+    <% @users.each do |user| %>
+    <%= radio_button_tag('discussion[user_id]',user.id,(@discussion.user==user),id: dom_id(user))%>
+    <%= f.label "user's email", user.email,id: dom_id(user) %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Save" %>
+<% end %>

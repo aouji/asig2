@@ -1,0 +1,15 @@
+<%= form_for [@proj,@discussion,@comment] do |f| %>
+  <% if @comment.errors.any? %>
+    <ul>
+      <% @comment.errors.full_messages.each do |message| %>
+      <li class='rederror'><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div>
+    <%= f.label :body, "Comment:" %>
+    <br>
+    <%= f.text_area :body  %>
+  </div>
+  <%= f.submit "Save" %>
+<% end %>

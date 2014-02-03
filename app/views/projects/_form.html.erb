@@ -1,0 +1,36 @@
+<%= form_for @proj do |f| %>
+  <% if @proj.errors.any? %>
+    <ul>
+      <% @proj.errors.full_messages.each do |message| %>
+      <li class='rederror'><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div><%= f.label :title, "Project's title" %>
+    <br>
+    <%= f.text_field :title%>
+  </div>
+    <br>
+  <div>
+    <%= f.label :description, "Project's description" %>
+    <br>
+    <%= f.text_area :description  %>
+  </div>
+  <% if !@proj.persisted? %>
+  <div>
+    <%= check_box_tag('project[collab]',"yes", checked: "checked")%>
+    <br>
+    <%= f.label :description, "Add me to the project's collaboratos." %>
+  </div>
+  <br>
+  <% else %>
+  <h2>Change project's owner</h2>
+  <div>
+    <p>Note: If you change the owner, you will no longer be able to edit the project and might completely lose access to it if you are not on the collaborator's list.</p>
+    <% @users.each do |user| %>
+    <%= radio_button_tag('project[user_id]',user.id,(@proj.user==user),id: dom_id(user))%>
+    <%= f.label "user's email", user.email,id: dom_id(user) %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Save" %>
+<% end %>

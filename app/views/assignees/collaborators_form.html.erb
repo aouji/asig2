@@ -1,0 +1,16 @@
+<% if @task.errors.any? %>
+  <% @task.errors.each do |err| %>
+    <p><%= err %></p>
+  <% end %>
+<% end %>
+
+<%= form_for @task, {url: project_task_assignees_path(@proj.id,@task.id), method: "post"} do |f| %>
+  <%=hidden_field "task[assignee_ids]",''%>
+  <ul>
+  <% @users.each do |user| %>
+  <%= f.label "user's email", user.email,id: dom_id(user) %>
+  <%= check_box_tag('task[assignee_ids][]',user.id,@task.assignees.include?(user),id: dom_id(user))%>
+  <% end %>
+  </ul>
+<%= f.submit 'submit' %>
+<%end %> 

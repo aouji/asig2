@@ -1,0 +1,46 @@
+	<%= content_for :title, "Tasks for YOU" %> 
+	<!-- #{current_user.email} -->
+<%= link_to "Create new task",new_project_task_path %>
+	<table>
+    <tr>
+      <th colspan='2'>Project <%=@proj.id%> tasks you manage</th>
+    </tr>
+    <tr>
+      <th>Task</th>
+      <th>Progress</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @owned.each do |own| %>
+    <tr>  
+      <td><%= link_to own.name,project_task_path(@proj,own) %></td>
+      <td><%= own.complete? %></td>
+      <% @task=own %>
+      <td><%= link_to("modify",edit_project_task_path(@proj,own))%></td>
+      <td><%= render "change_status" %></td>
+      <td><%= link_to("Delete task",project_task_path(@proj,own),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) %></td>
+
+    </tr>
+    <% end %>
+  </table>
+  <br>
+  <table>
+    <tr>
+      <th colspan='2'>Project <%=@proj.id%> tasks assigned to you</th>
+    </tr>
+    <tr>
+      <th>Task</th>
+      <th>Progress</th>
+      <th>&nbsp;</th>
+    </tr>
+    <% @assigned.each do |assigned| %>
+    <tr>  
+      <td><%= link_to assigned.name,project_task_path(@proj,assigned) %></td>
+      <td><%= assigned.complete? %></td>
+      <% @task=assigned %>
+      <td><%= render "change_status" %></td>
+    </tr>
+    <% end %>
+  </table>
+<%= link_to "Back to project #{@proj.id}",project_path(@proj) %>

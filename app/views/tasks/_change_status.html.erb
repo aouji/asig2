@@ -1,0 +1,11 @@
+<% if current_user.can_finish_task? @task %>
+  <%= form_for [@proj,@task] do |f|%>
+    <% if @task.completed %>
+      <%= hidden_field_tag 'task[completed]',"false"%>
+      <%=f.submit "Mark as Incomplete" %>
+    <% else %>
+      <%= hidden_field_tag 'task[completed]',"true"%>
+      <%=f.submit "Mark as Complete" %>
+    <%end %>
+  <% end %>
+<%end %>

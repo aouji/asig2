@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>As2</title>
+  <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <ul class="nav nav-pills nav-justified">
+    <% if user_signed_in? %>
+    <li><%= link_to "Sign Out",destroy_user_session_path,method: 'delete' %></li>
+    </ul>
+    <h1>Hello <%=current_user.email %></h1>
+    <% else %>
+      <li><%= link_to "Sign In",new_user_session_path %></li>
+      <li><%= link_to "Sign Up",new_user_registration_path %></li>
+    </ul>
+    <%end%>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
 <%= yield %>
 
 </body>

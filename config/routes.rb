@@ -1,10 +1,25 @@
 As2::Application.routes.draw do
+  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
+  root 'projects#index'
+  resources :projects do 
+    # get 'collaborators' => 'projects#manage_collaborators', as: :proj_collabs
+    # post ':id/collaborators' => 'projects#add_remove_collaborators', on: :collection, as: :proj_collabs
+    resources :members, only: [:index,:update,:new,:create]
+    resources :tasks do
+      resources :assignees, only: [:index,:update,:new,:create]
+    end
+      # get ':id/collaborators' => 'tasks#manage_collaborators', on: :collection, as: :task_collabs
+      # post ':id/collaborators' => 'tasks#add_remove_collaborators', on: :collection, as: :task_collabs
+    resources :discussions do
+      resources :comments
+    end
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
