@@ -6,7 +6,7 @@
     <dd><%= @discussion.body %></dd>
 <% if current_user.can_modify_discussion? @discussion %>
   <%= link_to("modify",edit_project_discussion_path(@proj,@discussion))%>
-  <%= link_to("delete discussion",project_discussion_path(@proj,@discussion),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
+  <%= button_to("delete discussion",project_discussion_path(@proj,@discussion),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
 <%end%>
 <% if @comments[0] %>
 <ul>
@@ -14,7 +14,7 @@
   <li>By <%= comment.user.email%> at <%=comment.created_at.to_formatted_s(:long)%>: &nbsp; &nbsp; &nbsp;
   <% if current_user.can_modify_comment? comment %>
     <%= link_to("modify",edit_project_discussion_comment_path(@proj,@discussion,comment))%>
-    <%= link_to("delete comment",project_discussion_comment_path(@proj,@discussion,comment),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
+    <%= button_to("delete comment",project_discussion_comment_path(@proj,@discussion,comment),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) %>
   <%end%>
     <ul>
    <li><%= comment.body %></li></ul>

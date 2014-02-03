@@ -7,7 +7,7 @@
       <li>Title: <%= link_to owned.title, project_discussion_path(@proj,owned) %>
         <ul>
         <li>Body: <%= truncate_s(owned.body,30) %></li>
-        <li><%= link_to "Delete discussion",project_discussion_path(@proj,owned),method: :delete, data: {confirm: "Are you sure you want to delete this?"} %></li>
+        <li><%= button_to "Delete discussion",project_discussion_path(@proj,owned),method: :delete, data: {confirm: "Are you sure you want to delete this?"} %></li>
       </ul></li>
     <% end %>
     </ul>

@@ -20,7 +20,7 @@
       <td><%= task.due %></td>
       <td><%= task.complete? %></td>
       <td><%= current_user.can_modify_task?(task)? link_to("modify",edit_project_task_path(@proj,task)) : " " %></td>
-      <td><%= current_user.can_modify_task?(task)? link_to("Delete task",project_task_path(@proj,task),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) : " " %></td>
+      <td><%= current_user.can_modify_task?(task)? button_to("Delete task",project_task_path(@proj,task),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) : " " %></td>
     </tr>
 <% end %>
 </table>
@@ -43,7 +43,7 @@
     <td><%= link_to discussion.title,project_discussion_path(@proj,discussion) %></td>
     <td> <%= discussion.body %></td>
     <td><%= current_user.can_modify_discussion?(discussion)? link_to("modify",edit_project_discussion_path(@proj,discussion)) : " " %></td>
-    <td><%= current_user.can_modify_discussion?(discussion)? link_to("Delete discussion",project_discussion_path(@proj,discussion),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) : " " %></td>
+    <td><%= current_user.can_modify_discussion?(discussion)? button_to("Delete discussion",project_discussion_path(@proj,discussion),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) : " " %></td>
   </tr>
 </table>
 <% end %>
