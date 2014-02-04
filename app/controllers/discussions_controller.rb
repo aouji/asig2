@@ -4,9 +4,8 @@ class DiscussionsController < ApplicationController
 
   def index
     # @owned=current_user.discussions
-    # @owned=@proj.discussions.where("user_id=?",current_user.id)   # current_user.projects.find(@proj).tasks.order("completed asc")
-    # @proj_discussions=@proj.discussions
-    super.show
+    @owned=@proj.discussions.where("user_id=?",current_user.id)   # current_user.projects.find(@proj).tasks.order("completed asc")
+    @proj_discussions=@proj.discussions
   end
 
   def new

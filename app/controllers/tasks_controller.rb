@@ -3,8 +3,8 @@ class TasksController < ApplicationController
   before_action :get_task, only: [:show,:destroy,:edit,:update]
 
   def index
-    @owned=@proj.tasks.where("user_id=?",current_user.id)   # current_user.projects.find(@proj).tasks.order("completed asc")
-    @assigned=current_user.assigned_tasks.where("project_id=?",@proj.id)
+    @owned=@proj.tasks.where("user_id=?",current_user.id).order("completed")  # current_user.projects.find(@proj).tasks.order("completed asc")
+    @assigned=current_user.assigned_tasks.where("project_id=?",@proj.id).order("completed")
     # current_user.projects.find(@proj).tasks.order("completed asc")
   end
 

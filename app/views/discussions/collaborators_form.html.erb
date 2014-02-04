@@ -1,0 +1,9 @@
+<%= form_for [@proj,discu, url: :proj_collabs do |f| %>
+  <ul>
+  <% @users.each do |user| %>
+  <%= f.label "user's email", user.email %>
+  <%= check_box_tag('task[user_ids][]',user.id,@proj.members.include?(user) ) %>
+  <% end %>
+  </ul>
+<%= f.submit 'submit' %>
+<%end %> 

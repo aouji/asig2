@@ -17,6 +17,7 @@ class CommentsController < DiscussionsController
     @comment=current_user.comments.new get_comment_params
     @comment.discussion=@discussion
     if @comment.save
+      NewCommentMailer.notify_owner(@comment).deliver
       redirect_to project_discussion_path(@proj,@discussion)
     else
       render :new
