@@ -12,6 +12,7 @@
       </ul></li>
     <% end %>
     </ul>
+    <%= will_paginate @owned_projs, previous_label: "(prev)", next_label: "(next)" %>
   <h2>Projects you are a member of</h2>
     <ul>
     <% @member_projs.each do |member_in| %>

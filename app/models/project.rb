@@ -10,7 +10,9 @@ class Project < ActiveRecord::Base
   has_many :members,through: :project_assignees, source: :user
   has_many :discussions
   after_save :propogate_removed_users
- 
+  has_many :comments, as: :commentable,dependent: :destroy
+  has_many :commenters, through: :comments, source: :user
+
   def propogate_removed_users
     # assignee_ids=[]
     # tasks.each do |task|
