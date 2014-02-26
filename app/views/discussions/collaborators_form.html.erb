@@ -1,4 +1,4 @@
-<%= form_for @proj, url: :proj_collabs do |f| %>
+<%= form_for [@proj,discu, url: :proj_collabs do |f| %>
   <ul>
   <% @users.each do |user| %>
   <%= f.label "user's email", user.email %>

@@ -1,10 +1,10 @@
 class TasksController < ApplicationController
   before_action :get_project
   before_action :get_task, only: [:show,:destroy,:edit,:update]
-
+  before_action :authorize, only: [:destroy,:update]
   def index
-    @owned=@proj.tasks.where("user_id=?",current_user.id)   # current_user.projects.find(@proj).tasks.order("completed asc")
-    @assigned=current_user.assigned_tasks.where("project_id=?",@proj.id)
+    @owned=@proj.tasks.where("user_id=?",current_user.id).order("completed")  # current_user.projects.find(@proj).tasks.order("completed asc")
+    @assigned=current_user.assigned_tasks.where("project_id=?",@proj.id).order("completed")
     # current_user.projects.find(@proj).tasks.order("completed asc")
   end
 
@@ -79,4 +79,7 @@ class TasksController < ApplicationController
     end
   end
 
+  def authorize
+    redirect_to root_path,alert: "cannot" unless can? :manage,@task
+  end
 end

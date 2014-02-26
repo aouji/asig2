@@ -4,8 +4,9 @@ class ProjectsController < ApplicationController
   before_action :redirect_if_not_owner, only: [:destroy,:edit,:update]
   
   def index
-    @owned_projs=current_user.projects
+    # @owned_projs=current_user.projects
     @member_projs=current_user.assigned_projects
+    @owned_projs=Project.page(params[:page]).per_page(2)
   end
 
   def new

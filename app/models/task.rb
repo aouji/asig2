@@ -6,6 +6,8 @@ class Task < ActiveRecord::Base
   validate :due_date_checker
   # has_many :task_assignees, through: :, source: 
 
+  has_many :comments, as: :commentable,dependent: :destroy
+  has_many :commenters, through: :comments, source: :user
 
   def due_date_checker
     if !due.present? || due < Date.today

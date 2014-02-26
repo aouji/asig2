@@ -2,6 +2,10 @@
 <%= link_to "Your projects",projects_path%>
 <br>
 <h3>Project <%=@proj.id%>'s tasks and discussions</h3>
+ <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+<%= render "form", users: @proj.members %>
 <%= link_to "Create new task",new_project_task_path(@proj) %>
 <% if @tasks[0] %>
   <table>
@@ -19,7 +23,7 @@
       <td><%= truncate_s(task.description,30) %></td>
       <td><%= task.due %></td>
       <td><%= task.complete? %></td>
-      <td><%= current_user.can_modify_task?(task)? link_to("modify",edit_project_task_path(@proj,task)) : " " %></td>
+      <td><%= current_user.can_modify_task?(task)? link_to("modify",edit_project_task_path(@proj,task)) : " "%></td>
       <td><%= current_user.can_modify_task?(task)? button_to("Delete task",project_task_path(@proj,task),method: :delete, data: {confirm: "Are you sure you want to delete this?"}) : " " %></td>
     </tr>
 <% end %>
